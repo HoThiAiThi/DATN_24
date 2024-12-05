@@ -75,6 +75,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'chec
         Route::get('delete/{id}', 'AdminRoomController@delete')->name('get_admin.room.delete');
     }); 
     Route::group(['prefix' => 'renter'], function () {
-        Route::get('', 'RenterController@index')->name('get_admin.renter.index');    
+        Route::get('phongdaluu', 'RenterController@index')->name('get_admin.renter.index');    
+        Route::get('', 'RenterBookingController@index')->name('get_admin.renter.booking.index'); 
     });
 });

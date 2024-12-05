@@ -142,6 +142,10 @@
                             <a class="nav-link text-white" href="{{ route('get_admin.renter.index') }}"
                                 title="Category">Phòng đã lưu</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ route('get_admin.renter.booking.index') }}"
+                                title="Category">Phòng đã đặt</a>
+                        </li>
 
                         <!-- <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('get_admin.article.index') }}" title="Article">Bài
