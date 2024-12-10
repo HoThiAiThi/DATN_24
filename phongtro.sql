@@ -5,10 +5,10 @@ SET time_zone = "+00:00";
 -- Table structure for table `taikhoan`
 --
 CREATE TABLE `taikhoan` (
-  `maTK` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,
+  `maTK` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `ten` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `sodienthoai` varchar(255) NOT NULL, 
+  `sodienthoai` varchar(255) NOT NULL,
   `matkhau` varchar(255) NOT NULL,
   `quyen` varchar(255) NOT NULL,
   `ngaytao` timestamp NULL DEFAULT NULL,
@@ -29,12 +29,12 @@ INSERT INTO `taikhoan` (`maTK`, `ten`, `email`, `sodienthoai`, `matkhau`,`quyen`
 -- Table structure for table `quantrivien`
 --
 CREATE TABLE `quantrivien` (
-  `maQTV` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,
+  `maQTV` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `maTK` bigint(20) UNSIGNED NOT NULL,
   `ngaytao` timestamp NULL DEFAULT NULL,
   `ngaycapnhat` timestamp NULL DEFAULT NULL,
-  CONSTRAINT `fk_matk` FOREIGN KEY (`maTK`) REFERENCES `taikhoan` (`maTK`) 
-  ON DELETE CASCADE ON UPDATE CASCADE 
+  CONSTRAINT `fk_matk` FOREIGN KEY (`maTK`) REFERENCES `taikhoan` (`maTK`)
+  ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -49,7 +49,7 @@ INSERT INTO `quantrivien` (`maQTV`,`maTK`,`ngaytao`, `ngaycapnhat`) VALUES
 -- Table structure for table `chutro`
 --
 CREATE TABLE `chutro` (
-  `maCT` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,
+  `maCT` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `maTK` bigint(20) UNSIGNED NOT NULL,
   `anhdaidien` varchar(255) DEFAULT NULL,
   `sodukhadung` bigint(20) NOT NULL DEFAULT 0,
@@ -58,8 +58,8 @@ CREATE TABLE `chutro` (
   `trangthai` tinyint(4) NOT NULL DEFAULT 1,
   `ngaytao` timestamp NULL DEFAULT NULL,
   `ngaycapnhat` timestamp NULL DEFAULT NULL,
-  CONSTRAINT `fk_ct_matk` FOREIGN KEY (`maTK`) REFERENCES `taikhoan` (`maTK`) 
-  ON DELETE CASCADE ON UPDATE CASCADE 
+  CONSTRAINT `fk_ct_matk` FOREIGN KEY (`maTK`) REFERENCES `taikhoan` (`maTK`)
+  ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -74,15 +74,15 @@ INSERT INTO `chutro` (`maCT`,`maTK`, `anhdaidien`, `sodukhadung`, `cccd`, `anhst
 -- Table structure for table `nguoithue`
 --
 CREATE TABLE `nguoithue` (
-  `maNT` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,
+  `maNT` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `maTK` bigint(20) UNSIGNED NOT NULL,
   `diachi` varchar(255) DEFAULT NULL,
   `ngaysinh` date DEFAULT NULL,
   `anhdaidien` varchar(255) DEFAULT NULL,
   `ngaytao` timestamp NULL DEFAULT NULL,
   `ngaycapnhat` timestamp NULL DEFAULT NULL,
-  CONSTRAINT `fk_nt_matk` FOREIGN KEY (`maTK`) REFERENCES `taikhoan` (`maTK`) 
-  ON DELETE CASCADE ON UPDATE CASCADE 
+  CONSTRAINT `fk_nt_matk` FOREIGN KEY (`maTK`) REFERENCES `taikhoan` (`maTK`)
+  ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -98,15 +98,15 @@ INSERT INTO `nguoithue` (`maNT`,`maTK`, `diachi`, `ngaysinh`, `anhdaidien`,`ngay
 --
 
 CREATE TABLE `giaodich` (
-  `maGD` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,
+  `maGD` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `maCT` bigint(20) UNSIGNED NOT NULL,
   `loai` tinyint(4) NOT NULL COMMENT 'phương thức',
   `sotien` int(11) NOT NULL DEFAULT 0,
   `trangthai` tinyint(4) NOT NULL DEFAULT 1,
   `ngaytao` timestamp NULL DEFAULT NULL,
   `ngaycapnhat` timestamp NULL DEFAULT NULL,
-   CONSTRAINT `fk_mact` FOREIGN KEY (`maCT`) REFERENCES `chutro` (`maCT`) 
-   ON DELETE CASCADE ON UPDATE CASCADE 
+   CONSTRAINT `fk_mact` FOREIGN KEY (`maCT`) REFERENCES `chutro` (`maCT`)
+   ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -122,7 +122,7 @@ INSERT INTO `giaodich` (`maGD`,`maCT`, `loai`, `sotien`, `trangthai`,`ngaytao`, 
 --
 
 CREATE TABLE `danhmuc` (
-  `maDM` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,
+  `maDM` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `ten` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `mota` varchar(255) DEFAULT NULL,
@@ -145,7 +145,7 @@ INSERT INTO `danhmuc` (`maDM`, `ten`, `slug`, `mota`, `trangthai`, `ngaytao`, `n
 --
 
 CREATE TABLE `quanhuyen` (
-  `maQH` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,
+  `maQH` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `ten` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `ngaytao` timestamp NULL DEFAULT NULL,
@@ -172,14 +172,14 @@ INSERT INTO `quanhuyen` (`maQH`, `ten`, `slug`,`ngaytao`, `ngaycapnhat`) VALUES
 --
 
 CREATE TABLE `phuongxa` (
-  `maPX` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,
+  `maPX` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `maQH` bigint(20) UNSIGNED NOT NULL,
   `ten` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `ngaytao` timestamp NULL DEFAULT NULL,
   `ngaycapnhat` timestamp NULL DEFAULT NULL,
-   CONSTRAINT `fk_maqh` FOREIGN KEY (`maQH`) REFERENCES `quanhuyen` (`maQH`) 
-   ON DELETE CASCADE ON UPDATE CASCADE 
+   CONSTRAINT `fk_maqh` FOREIGN KEY (`maQH`) REFERENCES `quanhuyen` (`maQH`)
+   ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
@@ -231,7 +231,7 @@ INSERT INTO `phuongxa` (`maPX`,`maQH`, `ten`, `slug`,`ngaytao`, `ngaycapnhat`) V
 --
 
 CREATE TABLE `baidang` (
-  `maBD` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,
+  `maBD` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `ten` varchar(255) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
   `mota` text DEFAULT NULL COMMENT 'tieude',
@@ -249,11 +249,11 @@ CREATE TABLE `baidang` (
   `map` text DEFAULT NULL,
   `ngaytao` timestamp NULL DEFAULT NULL,
   `ngaycapnhat` timestamp NULL DEFAULT NULL,
-   CONSTRAINT `fk_mapx` FOREIGN KEY (`maPX`) REFERENCES `phuongxa` (`maPX`) 
+   CONSTRAINT `fk_mapx` FOREIGN KEY (`maPX`) REFERENCES `phuongxa` (`maPX`)
    ON DELETE CASCADE ON UPDATE CASCADE,
-   CONSTRAINT `fk_madm` FOREIGN KEY (`maDM`) REFERENCES `danhmuc` (`maDM`) 
+   CONSTRAINT `fk_madm` FOREIGN KEY (`maDM`) REFERENCES `danhmuc` (`maDM`)
    ON DELETE CASCADE ON UPDATE CASCADE,
-   CONSTRAINT `fk_bd_mact` FOREIGN KEY (`maCT`) REFERENCES `chutro` (`maCT`) 
+   CONSTRAINT `fk_bd_mact` FOREIGN KEY (`maCT`) REFERENCES `chutro` (`maCT`)
    ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -273,15 +273,15 @@ INSERT INTO `baidang` (`maBD`, `ten`, `slug`, `mota`,`maPX`, `gia`, `khoanggia`,
 --
 
 CREATE TABLE `danhgia` (
-  `maDG` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,
+  `maDG` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `maBD` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `maNT` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `sosao` int NOT NULL,
   `ngaytao` timestamp NULL DEFAULT NULL,
   `ngaycapnhat` timestamp NULL DEFAULT NULL,
-   CONSTRAINT `fk_mabd` FOREIGN KEY (`maBD`) REFERENCES `baidang` (`maBD`) 
+   CONSTRAINT `fk_mabd` FOREIGN KEY (`maBD`) REFERENCES `baidang` (`maBD`)
    ON DELETE CASCADE ON UPDATE CASCADE,
-   CONSTRAINT `fk_mant` FOREIGN KEY (`maNT`) REFERENCES `nguoithue` (`maNT`) 
+   CONSTRAINT `fk_mant` FOREIGN KEY (`maNT`) REFERENCES `nguoithue` (`maNT`)
    ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -298,13 +298,13 @@ INSERT INTO `danhgia` (`maDG`,`maBD`, `maNT`, `sosao`,`ngaytao`, `ngaycapnhat`) 
 --
 
 CREATE TABLE `hinhanh` (
-  `maHA` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,
+  `maHA` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `maBD` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `ten` varchar(255) DEFAULT NULL,
   `duongdan` varchar(255) DEFAULT NULL,
   `ngaytao` timestamp NULL DEFAULT NULL,
   `ngaycapnhat` timestamp NULL DEFAULT NULL,
-   CONSTRAINT `fk_ha_mabd` FOREIGN KEY (`maBD`) REFERENCES `baidang` (`maBD`) 
+   CONSTRAINT `fk_ha_mabd` FOREIGN KEY (`maBD`) REFERENCES `baidang` (`maBD`)
    ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -322,15 +322,15 @@ INSERT INTO `hinhanh` (`maHA`,`maBD`, `ten`, `duongdan`,  `ngaytao`, `ngaycapnha
 --
 
 CREATE TABLE `thanhtoan` (
-  `maTT` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,
+  `maTT` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `maCT` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `loai` tinyint(4) NOT NULL DEFAULT 1,
-  `maBD` bigint(20) NOT NULL DEFAULT 0, 
+  `maBD` bigint(20) NOT NULL DEFAULT 0,
   `sotien` int(11) NOT NULL DEFAULT 0,
   `trangthai` tinyint(4) NOT NULL DEFAULT 1,
   `ngaytao` timestamp NULL DEFAULT NULL,
   `ngaycapnhat` timestamp NULL DEFAULT NULL,
-   CONSTRAINT `fk_tt_mact` FOREIGN KEY (`maCT`) REFERENCES `chutro` (`maCT`) 
+   CONSTRAINT `fk_tt_mact` FOREIGN KEY (`maCT`) REFERENCES `chutro` (`maCT`)
    ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -348,7 +348,7 @@ INSERT INTO `thanhtoan` (`maTT`, `maCT`, `loai`, `maBD`,`sotien`, `trangthai`, `
 --
 
 CREATE TABLE `donthuephong` (
-  `maDTP` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,
+  `maDTP` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `maBD` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `maNT` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `anhtt` varchar(255) NOT NULL ,
@@ -356,9 +356,9 @@ CREATE TABLE `donthuephong` (
   `ngaytra` date DEFAULT NULL,
   `ngaytao` timestamp NULL DEFAULT NULL,
   `ngaycapnhat` timestamp NULL DEFAULT NULL,
-   CONSTRAINT `fk_dtp_mabd` FOREIGN KEY (`maBD`) REFERENCES `baidang` (`maBD`) 
+   CONSTRAINT `fk_dtp_mabd` FOREIGN KEY (`maBD`) REFERENCES `baidang` (`maBD`)
    ON DELETE CASCADE ON UPDATE CASCADE,
-   CONSTRAINT `fk_dtp_mant` FOREIGN KEY (`maNT`) REFERENCES `nguoithue` (`maNT`) 
+   CONSTRAINT `fk_dtp_mant` FOREIGN KEY (`maNT`) REFERENCES `nguoithue` (`maNT`)
    ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterLandlordController;
+use App\Http\Controllers\Auth\RegisterRenterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'Auth'], function () {
     Route::get('renter', 'RegisterRenterController@index')->name('get.register.renter');
     Route::get('landlord', 'RegisterLandlordController@index')->name('get.register.landlord');
+    
+    Route::post('/register/nguoi-thue', [RegisterRenterController::class, 'NguoiThue'])->name('register.nguoithue');
+    Route::post('/register/chu-tro', [RegisterLandlordController::class, 'ChuTro'])->name('register.chutro');
     //Route::get('', 'RegisterController@index')->name('get.register'); // xoa dong nay thì home chạy mặc định
     Route::get('dang-ky.html', 'RegisterController@index')->name('get.register');
     Route::post('dang-ky.html', 'RegisterController@register')->name('get.register');

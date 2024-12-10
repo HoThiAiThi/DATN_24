@@ -10,8 +10,8 @@
         <h1 class="title" style="text-align: center;">Tạo tài khoản người thuê mới</h1>
     </div>
     <div class="auth-content">
-        <form action="" method="POST" autocomplete="off">
-            @csrf   
+        <form action="{{ route('register.nguoithue') }}" method="POST" autocomplete="off">
+            @csrf
             <div class="form-group">
                 <label for="ngaysinh">Ngày sinh</label>
                 <input type="date" class="form-control" required placeholder="" name="ngaysinh">
@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label for="diachi">Địa chỉ</label>
                 <input type="text" class="form-control" required placeholder="" name="diachi">
-            </div>         
+            </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-green btn-submit" style="background-color: #10BD85;">Tạo tài
                     khoản</button>

@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app_master')
 @section('title', 'Register')
 @push('css')
-<link href="/css/auth.css" rel="stylesheet">
+    <link href="/css/auth.css" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -25,17 +25,27 @@
                 <input type="text" class="form-control" required placeholder="" name="sodienthoai">
             </div>
             <div class="form-group">
-                <label for="password">Mật khẩu</label>
-                <input type="password" class="form-control" required placeholder="" name="password">
+                <label for="matkhau">Mật khẩu</label>
+                <input type="password" class="form-control" required placeholder="" name="matkhau">
             </div>
-            <div class="form-group" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+            <!-- <div class="form-group" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
                 <a href="{{ route('get.register.landlord') }}" class="btn btn-green" style="background-color: #10BD85; padding: 10px 20px; text-decoration: none; color: white; display: inline-block; text-align: center;">
                     Chủ trọ
-                </a>    
+                </a>
                 <a href="{{ route('get.register.renter') }}" class="btn btn-green" style="background-color: #10BD85; padding: 10px 20px; text-decoration: none; color: white; display: inline-block; text-align: center;">
                     Người thuê
-                </a>    
+                </a>
+            </div> -->
+
+            <div class="form-group"
+                style="display: flex; justify-content: center; gap: 10px; margin-top: 20px; margin-bottom: 20px;">
+                <button type="submit" name="role" value="nguoithue" class="btn btn-green btn-submit"
+                    style="background-color: #10BD85; padding: 10px 20px; color: white;">Người Thuê</button>
+                <button type="submit" name="role" value="chutro" class="btn btn-green btn-submit"
+                    style="background-color: #10BD85; padding: 10px 20px; color: white;">Chủ Trọ</button>
             </div>
+
+
             <div class="form-group form-group-register">
                 <p class="text-center">Bạn đã có tài khoản? <a class="link" href="{{ route('get.login') }}">Đăng nhập
                         ngay</a></p>
@@ -50,5 +60,5 @@
 @stop
 
 @push('script')
-<script src="/js/auth.js"></script>
+    <script src="/js/auth.js"></script>
 @endpush

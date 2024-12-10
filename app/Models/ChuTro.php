@@ -7,11 +7,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class NguoiDung extends Authenticatable
+class ChuTro extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'taikhoan';
+    protected $table = 'chutro';
     /**
      * The attributes that are mass assignable.
      *
@@ -19,15 +19,7 @@ class NguoiDung extends Authenticatable
      */
     protected $guarded = [''];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'matkhau',
-
-    ];
+   
 
     /**
      * The attributes that should be cast.
@@ -38,5 +30,5 @@ class NguoiDung extends Authenticatable
     //     'email_verified_at' => 'datetime',
     // ];
     const CREATED_AT = 'ngaytao';
-    const UPDATED_AT = 'ngaycapnhat'; 
+    const UPDATED_AT = 'ngaycapnhat';
 }
