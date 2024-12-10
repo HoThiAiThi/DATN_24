@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class PageCategoryService
 {
-    public static function index($id, Request $request)
+    public static function index($maDM, Request $request)
     {
-        $category = DanhMuc::find($id);
+        $category = DanhMuc::find($maDM);
         $rooms    = RoomService::getListsRoom($request, $params = [
-            'danhmuc_id' => $id
+            'danhmuc_maDM' => $maDM
         ]);
         return [
             'category' => $category,

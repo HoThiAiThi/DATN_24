@@ -67,9 +67,9 @@
             <div class="row-lists">
                 <div class="form-group row-lists-3">
                     <label for="name">Loại chuyên mục</label>
-                    <select name="danhmuc_id" class="form-control" id="" data-placeholder="Click chọn danh mục">
+                    <select name="danhmuc_maDM" class="form-control" id="" data-placeholder="Click chọn danh mục">
                         @foreach($categories ?? [] as $item)
-                        <option value="{{ $item->id }}" {{ $item->id == ($room->danhmuc_id ?? 0) ? "selected" : ""}}>
+                        <option value="{{ $item->id }}" {{ $item->id == ($room->danhmuc_maDM ?? 0) ? "selected" : ""}}>
                             {{ $item->ten }}
                         </option>
                         @endforeach

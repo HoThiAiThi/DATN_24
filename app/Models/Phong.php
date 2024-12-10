@@ -53,7 +53,7 @@ class Phong extends Model
 
     public function category()
     {
-        return $this->belongsTo(DanhMuc::class, 'danhmuc_id');
+        return $this->belongsTo(DanhMuc::class, 'danhmuc_maDM');
     }
 
     public function district()

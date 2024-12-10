@@ -2,17 +2,17 @@
     <form role="search" method="GET" action="{{ route('get.room.search') }}" class="searchform js-form-submit-data">
         <div class="search_field container" style="justify-content: space-between">
             <style>
-                .search_field_item {
-                    width: 100% !important;
-                }
+            .search_field_item {
+                width: 100% !important;
+            }
             </style>
             <div class="search_field_item search_field_item_loaitin">
                 <label class="search_field_item_label">Loại tin</label>
-                <select id="search_room_type" class="form-control js_select2_room_type" name="danhmuc_id">
+                <select id="search_room_type" class="form-control js_select2_room_type" name="danhmuc_maDM">
                     <option value="">Tất cả</option>
                     {{ $categoriesGlobal->first() }}
                     @foreach($categoriesGlobal ?? [] as $item)
-                    <option value="{{ $item->id }}" {{ Request::get('danhmuc_id') == $item->id ? "selected" : "" }}>
+                    <option value="{{ $item->id }}" {{ Request::get('danhmuc_maDMd') == $item->id ? "selected" : "" }}>
                         {{ $item->ten }}
                     </option>
                     @endforeach
@@ -24,7 +24,8 @@
                     <option value="">Chọn quận huyện</option>
 
                     @foreach($locationsCity ?? [] as $item)
-                    <option value="{{ $item->id }}" {{ $item->id == ($room->qhuyen_id ?? (Request::get('qhuyen_id'))) ? "selected" : ""}}>
+                    <option value="{{ $item->id }}"
+                        {{ $item->id == ($room->qhuyen_id ?? (Request::get('qhuyen_id'))) ? "selected" : ""}}>
                         {{ $item->ten }}
                     </option>
                     @endforeach
@@ -33,10 +34,12 @@
             </div>
             <div class="search_field_item search_field_item_quanhuyen ">
                 <label class="search_field_item_label">Phường xã</label>
-                <select name="phuongxa_id" class="form-control " id="phuongxa_id" data-placeholder="Click chọn quận huyện">
+                <select name="phuongxa_id" class="form-control " id="phuongxa_id"
+                    data-placeholder="Click chọn quận huyện">
                     <option value="">Chọn phường xã</option>
                     @foreach($districts ?? [] as $item)
-                    <option value="{{ $item->id }}" {{ $item->id == ($room->phuongxa_id ?? (Request::get('phuongxa_id'))) ? "selected" : ""}}>
+                    <option value="{{ $item->id }}"
+                        {{ $item->id == ($room->phuongxa_id ?? (Request::get('phuongxa_id'))) ? "selected" : ""}}>
                         {{ $item->ten }}
                     </option>
                     @endforeach
@@ -73,15 +76,46 @@
 </div>
 
 <script>
-    var URL_LOAD_DISTRICT = '{{ route("get_user.load.district") }}'
-    var URL_LOAD_WARD = '{{ route("get_user.load.wards") }}'
+var URL_LOAD_DISTRICT = '{{ route("get_user.load.district") }}'
+var URL_LOAD_WARD = '{{ route("get_user.load.wards") }}'
 </script>
 @push('script')
 <script src="/js/user_room.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
 <script>
-    $(document).ready(function() {
-        console.log("document loaded");
+$(document).ready(function() {
+    console.log("document loaded");
+    $.ajax({
+            url: URL_LOAD_DISTRICT,
+            data: {
+                qhuyen_id: qhuyen_id
+            },
+        })
+        .done(function(data) {
+            // if (data) {
+            //     let options = `<option value="0"> Chọn phường xã </option>`;
+            //     data.map((item, index) => {
+            //         options += `<option value="${item.id}"> ${item.ten}</option>`
+            //     })
+            //     $("#phuongxa_id").html(options);
+            // }
+            // console.log('---------- data: ', data);
+            console.log('---------- data: ', data);
+        })
+        .fail(function() {
+            let options = `<option value="0"> Chọn phường xã </option>`;
+            $("#phuongxa_id").html(options);
+        });
+
+});
+
+$(function() {
+    $("#qhuyen_id").change(function() {
+        let $this = $(this);
+        let qhuyen_id = $this.val();
+        console.log('----', qhuyen_id);
+
         $.ajax({
                 url: URL_LOAD_DISTRICT,
                 data: {
@@ -89,74 +123,44 @@
                 },
             })
             .done(function(data) {
-                // if (data) {
-                //     let options = `<option value="0"> Chọn phường xã </option>`;
-                //     data.map((item, index) => {
-                //         options += `<option value="${item.id}"> ${item.ten}</option>`
-                //     })
-                //     $("#phuongxa_id").html(options);
-                // }
-                // console.log('---------- data: ', data);
+                if (data) {
+                    let options = `<option value="0"> Chọn phường xã </option>`;
+                    data.map((item, index) => {
+                        options += `<option value="${item.id}"> ${item.ten}</option>`
+                    })
+                    $("#phuongxa_id").html(options);
+                }
                 console.log('---------- data: ', data);
             })
             .fail(function() {
                 let options = `<option value="0"> Chọn phường xã </option>`;
                 $("#phuongxa_id").html(options);
             });
-
-    });
-
-    $(function() {
-        $("#qhuyen_id").change(function() {
-            let $this = $(this);
-            let qhuyen_id = $this.val();
-            console.log('----', qhuyen_id);
-
-            $.ajax({
-                    url: URL_LOAD_DISTRICT,
-                    data: {
-                        qhuyen_id: qhuyen_id
-                    },
-                })
-                .done(function(data) {
-                    if (data) {
-                        let options = `<option value="0"> Chọn phường xã </option>`;
-                        data.map((item, index) => {
-                            options += `<option value="${item.id}"> ${item.ten}</option>`
-                        })
-                        $("#phuongxa_id").html(options);
-                    }
-                    console.log('---------- data: ', data);
-                })
-                .fail(function() {
-                    let options = `<option value="0"> Chọn phường xã </option>`;
-                    $("#phuongxa_id").html(options);
-                });
-        })
-
-
-        $("#phuongxa_id").change(function() {
-            let $this = $(this);
-            let phuongxa_id = $this.val();
-            console.log('----', phuongxa_id);
-
-            $.ajax({
-                    url: URL_LOAD_WARD,
-                    data: {
-                        phuongxa_id: phuongxa_id
-                    },
-                })
-                .done(function(data) {
-                    if (data) {
-                        let options = `<option value="0"> Chọn phường xã </option>`;
-                        data.map((item, index) => {
-                            options += `<option value="${item.id}"> ${item.ten}</option>`
-                        })
-                        $("#huyen_id").html(options);
-                    }
-                    console.log('---------- data: ', data);
-                });
-        })
     })
+
+
+    $("#phuongxa_id").change(function() {
+        let $this = $(this);
+        let phuongxa_id = $this.val();
+        console.log('----', phuongxa_id);
+
+        $.ajax({
+                url: URL_LOAD_WARD,
+                data: {
+                    phuongxa_id: phuongxa_id
+                },
+            })
+            .done(function(data) {
+                if (data) {
+                    let options = `<option value="0"> Chọn phường xã </option>`;
+                    data.map((item, index) => {
+                        options += `<option value="${item.id}"> ${item.ten}</option>`
+                    })
+                    $("#huyen_id").html(options);
+                }
+                console.log('---------- data: ', data);
+            });
+    })
+})
 </script>
 @endpush

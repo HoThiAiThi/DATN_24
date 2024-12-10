@@ -14,7 +14,7 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('danhmuc', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('maDM');
             $table->string('ten');
             $table->string('slug')->unique();
            // $table->string('tieude')->nullable();

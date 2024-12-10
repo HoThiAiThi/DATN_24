@@ -22,7 +22,7 @@ class UserRoomController extends Controller
 {
     public function index(Request $request)
     {
-        $rooms = Phong::with('category:id,ten,slug', 'wards:id,ten,slug', 'district:id,ten,slug', 'paymentHistory:id,phong_id')
+        $rooms = Phong::with('category:maDM,ten,slug', 'wards:id,ten,slug', 'district:id,ten,slug', 'paymentHistory:id,phong_id')
             ->where("xacthuc_id", Auth::user()->id);
 
         $rooms = $rooms->orderByDesc("id")->paginate(10);
@@ -38,7 +38,7 @@ class UserRoomController extends Controller
     {
         $districts     = DiaChi::select('id', 'ten')->where('loai', 1)->get();
         $wards      = DiaChi::select('id', 'ten')->where('loai', 2)->get();
-        $categories = DanhMuc::select('id', 'ten')->get();
+        $categories = DanhMuc::select('maDM', 'ten')->get();
 
         $viewData = [
             'districts'  => $districts,
@@ -93,7 +93,7 @@ class UserRoomController extends Controller
         if (!$room) return abort(404);
         $districts  = DiaChi::select('id', 'ten')->where('loai', 1)->get();
         $wards      = DiaChi::select('id', 'ten')->where('loai', 2)->get();
-        $categories = DanhMuc::select('id', 'ten')->get();
+        $categories = DanhMuc::select('maDM', 'ten')->get();
         $images     = DB::table('hinhanh_ct')
             ->where("phong_id", $id)
             ->get();

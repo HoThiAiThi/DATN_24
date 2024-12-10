@@ -31,8 +31,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         try {
-            $categoriesGlobal = DanhMuc::select('id', 'ten', 'slug')->where('trangthai', 1)->get();
-            $categoriesGlobalSidebar = DanhMuc::select('id', 'ten', 'slug')->get();
+            $categoriesGlobal = DanhMuc::select('maDM', 'ten', 'slug')->where('trangthai', 1)->get();
+            $categoriesGlobalSidebar = DanhMuc::select('maDM', 'ten', 'slug')->get();
             $articlesNew = Phong::orderByDesc('id')->limit(5)->get();
             $locationsCity = DiaChi::where('parent_id', 0)->select('id', 'ten')->get();
 

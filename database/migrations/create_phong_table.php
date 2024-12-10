@@ -34,7 +34,7 @@ class CreateRoomsTable extends Migration
             $table->date('thoigian_ketthuc')->nullable()->comment('ngày hết hạn');
             $table->string('lydo')->nullable();
             $table->text('noidung')->nullable();
-            $table->bigInteger('danhmuc_id')->default(0);
+            $table->bigInteger('danhmuc_maDM')->default(0);
             $table->bigInteger('xacthuc_id')->default(0);
             $table->text('map')->nullable();
             $table->bigInteger('subject_id')->default(0);

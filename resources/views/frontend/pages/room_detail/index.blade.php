@@ -50,7 +50,7 @@
                 <ol>
                     @if (isset($room->category->ten))
                     <li>
-                        <a href="{{ route('get.category.item',['slug' => $room->category->slug,'id' => $room->danhmuc_id]) }}"
+                        <a href="{{ route('get.category.item',['slug' => $room->category->slug,'id' => $room->danhmuc_maDM]) }}"
                             title="{{ $room->category->ten }}"><span>{{ $room->category->ten }}</span></a>
                     </li>
                     @endif
@@ -74,7 +74,7 @@
             @if (isset($room->category->ten))
             <div class="post-cate">
                 Chuyên mục: <a
-                    href="{{ route('get.category.item',['slug' => $room->category->slug,'id' => $room->danhmuc_id]) }}">
+                    href="{{ route('get.category.item',['slug' => $room->category->slug,'id' => $room->danhmuc_maDM]) }}">
                     {{ $room->category->ten ?? "" }}</a>
             </div>
             @endif
@@ -138,7 +138,7 @@
                         <tr>
                             <td class="name">Loại tin rao:</td>
                             <td><a
-                                    href="{{ route('get.category.item',['slug' => $room->category->slug,'id' => $room->danhmuc_id]) }}">{{ $room->category->ten }}</a>
+                                    href="{{ route('get.category.item',['slug' => $room->category->slug,'id' => $room->danhmuc_maDM]) }}">{{ $room->category->ten }}</a>
                             </td>
                         </tr>
                         @endif
@@ -189,7 +189,7 @@
                 </p>
                 <!-- <a class="btn btn-report" target="_blank" rel="nofollow" href="/contact">
                     <i class="fa fa-flag" aria-hidden="true"></i> Gửi phản hồi
-                </a> -->            
+                </a> -->
             </div>
         </div>
         <div class="card b-rating">
@@ -197,17 +197,18 @@
                 <div class="cpn-heading">Đánh giá</div>
             </div>
             <div class="card-body">
-                <div class="rating-form">                             
+                <div class="rating-form">
                     <div class="stars">
                         <span class="star" data-value="1">&#9733;</span>
                         <span class="star" data-value="2">&#9733;</span>
                         <span class="star" data-value="3">&#9733;</span>
                         <span class="star" data-value="4">&#9733;</span>
                         <span class="star" data-value="5">&#9733;</span>
-                    </div>                                     
+                    </div>
                     <div class="form-group">
-                        <label for="review" >Nhập đánh giá của bạn:</label>
-                        <textarea id="review" class="form-control" rows="4" placeholder="Nhập nội dung đánh giá..."></textarea>
+                        <label for="review">Nhập đánh giá của bạn:</label>
+                        <textarea id="review" class="form-control" rows="4"
+                            placeholder="Nhập nội dung đánh giá..."></textarea>
                     </div>
                     <button type="button" class="btn btn-submit" onclick="submitReview()">Gửi đánh giá</button>
                 </div>
@@ -234,7 +235,7 @@
                                 </div>
                             </div>
                             <div class="user-comment">
-                                <span >Nội dung đánh giá của người dùng hiển thị tại đây</span>
+                                <span>Nội dung đánh giá của người dùng hiển thị tại đây</span>
                             </div>
                         </div>
                     </div>
@@ -289,8 +290,8 @@
     <div id="bookingPopup" class="popup-overlay" style="display: none;">
         <div class="popup-content">
             <span>Đặt phòng</span>
-            <p>Để đặt phòng, bạn vui lòng đặt cọc 500k vào ảnh STK này và gửi hình ảnh vào bên dưới.</p>            
-            <img src="{{ asset('images/STK.jpg') }}" alt="Số Tài Khoản" style="max-width: 100%; height: 200px;">           
+            <p>Để đặt phòng, bạn vui lòng đặt cọc 500k vào ảnh STK này và gửi hình ảnh vào bên dưới.</p>
+            <img src="{{ asset('images/STK.jpg') }}" alt="Số Tài Khoản" style="max-width: 100%; height: 200px;">
             <form id="bookingForm">
                 <label for="depositImage">Tải lên hình ảnh:</label>
                 <input type="file" id="depositImage" accept="image/*" required>

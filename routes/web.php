@@ -42,9 +42,9 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/', 'HomeController@index')->name('get.home'); //home chạy mặc định
     Route::get('bang-gia', 'HomeController@getServicePrice')->name('get.service.price');
     Route::get('tim-kiem', 'SearchRoomController@index')->name('get.room.search');
-    Route::get('chuyen-muc-{slug}-{id}', 'CategoryController@index')
+    Route::get('chuyen-muc-{slug}-{maDM}', 'CategoryController@index')
         ->name('get.category.item')
-        ->where(['slug' => '[a-z-0-9-]+', 'id' => '[0-9]+',]);
+        ->where(['slug' => '[a-z-0-9-]+', 'maDM' => '[0-9]+',]);
 
     Route::get('room/{slug}-{id}', 'RoomDetailController@detail')
         ->name('get.room.detail')

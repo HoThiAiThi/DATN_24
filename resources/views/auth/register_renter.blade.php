@@ -25,7 +25,6 @@
                     khoản</button>
             </div>
             <div class="form-group form-group-register">
-
                 <p class="text-center">Bạn đã có tài khoản? <a class="link" href="{{ route('get.login') }}">Đăng nhập
                         ngay</a></p>
             </div>

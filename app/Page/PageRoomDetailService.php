@@ -15,7 +15,7 @@ class PageRoomDetailService
     {
         $today = Date::today()->format('Y-m-d');
 
-        $checkTimeRoom = Phong::with('category:id,ten,slug', 'district:id,ten,slug', 'wards:id,ten,slug')
+        $checkTimeRoom = Phong::with('category:maDM,ten,slug', 'district:id,ten,slug', 'wards:id,ten,slug')
             ->whereDate('thoigian_batdau', '<=', $today)
             ->whereDate('thoigian_ketthuc', '>=', $today)
             ->find($id);
@@ -30,7 +30,7 @@ class PageRoomDetailService
                 ]);
         }
 
-        $room = Phong::with('category:id,ten,slug', 'district:id,ten,slug', 'wards:id,ten,slug')
+        $room = Phong::with('category:maDM,ten,slug', 'district:id,ten,slug', 'wards:id,ten,slug')
             ->whereIn('trangthai', [Phong::STATUS_ACTIVE, Phong::STATUS_EXPIRED])
             ->find($id);
 
@@ -38,7 +38,7 @@ class PageRoomDetailService
 
         $author        = NguoiDung::find($room->xacthuc_id);
         $roomsSuggests = RoomService::getListsRoom($request, $params = [
-            'danhmuc_id'      => $room->danhmuc_id,
+            'danhmuc_maDM'      => $room->danhmuc_maDM,
             'location_city_id' => $room->qhuyen_id,
         ]);
 

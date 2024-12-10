@@ -19,7 +19,7 @@ class AdminCategoryController extends Controller
         if ($request->n)
             $categories->where('ten', 'like', '%' . $request->n . '%');
 
-        $categories = $categories->orderByDesc('id')->paginate(20);
+        $categories = $categories->orderByDesc('maDM')->paginate(20);
 
         $viewData = [
             'categories' => $categories,
@@ -51,9 +51,9 @@ class AdminCategoryController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit($maDM)
     {
-        $category = DanhMuc::find($id);
+        $category = DanhMuc::find($maDM);
         $viewData = [
             'category' => $category
         ];
@@ -61,13 +61,13 @@ class AdminCategoryController extends Controller
         return view('admin.pages.category.update', $viewData);
     }
 
-    public function update($id, Request $request)
+    public function update($maDM, Request $request)
     {
         try {
             $data               = $request->except('_token');
             $data['slug']       = Str::slug($request->ten);
             $data['ngaycapnhat'] = Carbon::now();
-            DanhMuc::find($id)->update($data);
+            DanhMuc::find($maDM)->update($data);
 
             return redirect()->route('get_admin.category.index');
         } catch (\Exception $exception) {
@@ -76,9 +76,9 @@ class AdminCategoryController extends Controller
         }
     }
 
-    public function delete($id)
+    public function delete($maDM)
     {
-        DanhMuc::find($id)->delete();
+        DanhMuc::find($maDM)->delete();
         return redirect()->back();
     }
 }

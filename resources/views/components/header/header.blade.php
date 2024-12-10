@@ -14,7 +14,7 @@
                     href="{{ route('get.home') }}">Trang chủ</a></li>
             @foreach($categoriesGlobal ?? [] as $item)
             <li class="navbar_item {{ \Request::path() == 'chuyen-muc-'. $item->slug.'-'. $item->id ? 'active' : '' }}">
-                <a href="{{ route('get.category.item',['slug' => $item->slug,'id' => $item->id]) }}"
+                <a href="{{ route('get.category.item',['slug' => $item->slug,'maDM' => $item->maDM]) }}"
                     title="{{ $item->ten }}">{{ $item->ten }} </a>
             </li>
             @endforeach

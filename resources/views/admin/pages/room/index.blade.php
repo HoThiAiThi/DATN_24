@@ -7,10 +7,10 @@
             <input type="text" placeholder="Name" value="{{ Request::get('ten') }}" name="ten" class="form-control">
         </div>
         <div class="col-sm-3">
-            <select name="danhmuc_id" class="form-control" id="">
+            <select name="danhmuc_maDM" class="form-control" id="">
                 <option value="">Danh mục</option>
                 @foreach($categories as $item)
-                <option {{ Request::get('danhmuc_id') == $item->id ? "selected" : "" }} value="{{ $item->id }}">
+                <option {{ Request::get('danhmuc_maDM') == $item->id ? "selected" : "" }} value="{{ $item->id }}">
                     {{ $item->ten }}
                 </option>
                 @endforeach

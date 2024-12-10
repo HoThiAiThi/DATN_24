@@ -6,7 +6,8 @@
         <ul>
             @foreach($categoriesGlobalSidebar ?? [] as $item)
             <li>
-                <a href="{{ route('get.category.item',['slug' => $item->slug,'id' => $item->id]) }}" title="{{ $item->ten }}">{{ $item->ten }}
+                <a href="{{ route('get.category.item',['slug' => $item->slug,'maDM' => $item->maDM]) }}"
+                    title="{{ $item->ten }}">{{ $item->ten }}
                 </a>
 
             </li>

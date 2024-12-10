@@ -12,15 +12,15 @@ class AdminRoomController extends Controller
 {
     public function index(Request $request)
     {
-        $rooms      = Phong::with('category:id,ten,slug', 'district:id,ten,slug', 'wards:id,ten,slug');
-        if ($request->danhmuc_id)
-            $rooms->where('danhmuc_id', $request->danhmuc_id);
+        $rooms      = Phong::with('category:maDM,ten,slug', 'district:id,ten,slug', 'wards:id,ten,slug');
+        if ($request->danhmuc_maDM)
+            $rooms->where('danhmuc_maDM', $request->danhmuc_maDM);
 
         if ($request->ten)
             $rooms->where('ten', 'like', '%' . $request->ten . '%');
 
         $rooms      = $rooms->orderByDesc('id')->paginate(10);
-        $categories = DanhMuc::select('id', 'ten')->get();
+        $categories = DanhMuc::select('maDM', 'ten')->get();
         $viewData   = [
             'rooms'      => $rooms,
             'categories' => $categories,

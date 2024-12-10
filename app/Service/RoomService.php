@@ -63,9 +63,9 @@ class RoomService
         $self = new self();
         $rooms = Phong::whereIn('trangthai', [Phong::STATUS_ACTIVE, Phong::STATUS_EXPIRED]);
 
-        if ($categoryId = Arr::get($params, 'danhmuc_id')) {
+        if ($categoryId = Arr::get($params, 'danhmuc_maDM')) {
             // dd("Hello danh muc" . Arr::get($params, 'danhmuc_id'));
-            $rooms->where('danhmuc_id', $categoryId);
+            $rooms->where('danhmuc_maDM', $categoryId);
         }
 
         if ($cityId = Arr::get($params, 'location_city_id')) {

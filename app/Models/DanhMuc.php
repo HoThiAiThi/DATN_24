@@ -14,6 +14,7 @@ class DanhMuc extends Model
     use HasFactory;
     protected $table = 'danhmuc';
     protected $guarded = [''];
+    protected $primaryKey = 'maDM';
 
     /**
      * Summary of room
